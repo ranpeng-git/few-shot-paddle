@@ -66,4 +66,7 @@ I had trouble reproducing the results of this paper using the cosine distance me
 
 **Final**
 
-You can see each step of our implements with paddle compares to pytorch in **pipeline**.
+- See pretrained model in **pretrained** file.
+
+- You can see each step of our implements with paddle compares to pytorch in **pipeline**.
+
