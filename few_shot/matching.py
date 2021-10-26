@@ -142,6 +142,6 @@ def matching_net_predictions(attention: paddle.Tensor, n: int, k: int, q: int) -
     # print(y_onehot)
     # print(y_onehot.shape)
     # print(attention.shape)
-    y_pred = paddle.matmul(attention, paddle.cast(y_onehot  , 'float32'))
+    y_pred = paddle.matmul(attention, paddle.cast(y_onehot  , 'float64'))
 
     return y_pred

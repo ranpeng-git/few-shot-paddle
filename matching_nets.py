@@ -13,6 +13,10 @@ from few_shot.callbacks import *
 from few_shot.utils import setup_dirs
 from config import PATH
 
+import warnings
+
+warnings.filterwarnings('ignore') 
+
 
 setup_dirs()
 # assert torch.cuda.is_available()
@@ -68,6 +72,7 @@ model = MatchingNetwork(args.n_train, args.k_train, args.q_train, args.fce, num_
                         lstm_input_size=lstm_input_size,
                         unrolling_steps=args.unrolling_steps,
                         device=device)
+model.to(dtype='float64')
 # model.to(device, dtype=torch.double)
 
 

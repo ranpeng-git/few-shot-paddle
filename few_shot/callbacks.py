@@ -388,14 +388,22 @@ class ReduceLROnPlateau(Callback):
                 self.wait = 0
 
     def _reduce_lr(self, epoch):
-        for i, param_group in enumerate(self.optimiser.param_groups):
-            old_lr = float(param_group['lr'])
-            new_lr = max(old_lr * self.factor, self.min_lrs[i])
-            if old_lr - new_lr > self.min_delta:
-                param_group['lr'] = new_lr
-                if self.verbose:
-                    print('Epoch {:5d}: reducing learning rate'
-                          ' of group {} to {:.4e}.'.format(epoch, i, new_lr))
+        # for i, param_group in enumerate(self.optimiser.param_groups):
+            # old_lr = float(param_group['lr'])
+            # new_lr = max(old_lr * self.factor, self.min_lrs[i])
+            # if old_lr - new_lr > self.min_delta:
+            #     param_group['lr'] = new_lr
+            #     if self.verbose:
+            #         print('Epoch {:5d}: reducing learning rate'
+            #               ' of group {} to {:.4e}.'.format(epoch, i, new_lr))
+        old_lr = float(self.optimiser.get_lr())
+        new_lr = max(old_lr * self.factor, max(self.min_lrs))
+        print('min_lrs is {}'.format(self.min_lrs) )
+        if old_lr - new_lr > self.min_delta:
+            self.optimiser.set_lr(new_lr)
+            if self.verbose:
+                print('Epoch {:5d}: reducing learning rate'
+                        '  to {:.4e}.'.format(epoch,  new_lr))
 
     def in_cooldown(self):
         return self.cooldown_counter > 0

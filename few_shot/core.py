@@ -171,7 +171,7 @@ def prepare_nshot_task(n: int, k: int, q: int) -> Callable:
         TODO: Move to arbitrary device
         """
         x, y = batch
-        x = paddle.cast(x , "float32")
+        x = paddle.cast(x , "float64")
         # Create dummy 0-(num_classes - 1) label
         y = create_nshot_task_label(k, q)
         return x, y
@@ -194,5 +194,5 @@ def create_nshot_task_label(k: int, q: int) -> paddle.Tensor:
     # Returns
         y: Label vector for n-shot task of shape [q * k, ]
     """
-    y = paddle.cast(paddle.arange(0, k, 1 / q , "float32") , 'int64')
+    y = paddle.cast(paddle.arange(0, k, 1 / q , "float64") , 'int64')
     return y
