@@ -50,11 +50,6 @@ if args.dataset == 'omniglot':
     dataset_class = OmniglotDataset
     num_input_channels = 1
     lstm_input_size = 64
-elif args.dataset == 'miniImageNet':
-    n_epochs = 200
-    dataset_class = MiniImageNet
-    num_input_channels = 3
-    lstm_input_size = 1600
 else:
     raise(ValueError, 'Unsupported dataset')
 
@@ -73,7 +68,6 @@ model = MatchingNetwork(args.n_train, args.k_train, args.q_train, args.fce, num_
                         unrolling_steps=args.unrolling_steps,
                         device=device)
 model.to(dtype='float64')
-# model.to(device, dtype=torch.double)
 
 
 ###################

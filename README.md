@@ -9,7 +9,34 @@ See these Medium articles for some more information
 - [Theory and concepts](https://towardsdatascience.com/advances-in-few-shot-learning-a-guided-tour-36bc10a68b77)
 - [Discussion of implementation details](https://towardsdatascience.com/advances-in-few-shot-learning-reproducing-results-in-pytorch-aba70dee541d)
 
+**Strcuture**
+
+``` 
+├── pretrained/
+│   ├── omniglot_n=1_k=5_q=15_nv=1_kv=5_qv=1_dist=l2_fce=None.pdparams       
+├── few_shot/                
+│   ├── __init__
+│   ├── callbacks
+│   ├── core
+│   ├── datasets
+│   ├── eval
+│   ├── maml
+│   ├── matching
+│   ├── metrics
+│   ├── models
+│   ├── proto
+│   ├── train
+│   ├── utils
+├── config                 
+├── matching_nets 
+├── prepare_omniglot        
+├── requirements.txt                      
+├── README.md
+
+```
+
 # Setup
+
 ### Requirements
 
 Listed in `requirements.txt`. Install with `pip install -r requirements.txt` preferably in a virtualenv.
@@ -29,6 +56,14 @@ DATA_PATH/
 ```
 
 **Omniglot** dataset. Download from https://github.com/brendenlake/omniglot/tree/master/python, place the extracted files into `DATA_PATH/Omniglot_Raw` and run `prepare_omniglot.py`
+
+# Train
+
+This repo take omniglot datasets as default for training. You can run as below ( parameter description refer to `Arguments` ):
+
+```
+python -m matching_nets.py --dataset omniglot --fce False --k-test 5 --n-test 1 --distance l2
+```
 
 ## Matching Networks
 
@@ -59,14 +94,7 @@ I had trouble reproducing the results of this paper using the cosine distance me
 | Pytorch Published (l2) | 98.3   |
 | This paddle Repo (l2) | 98.85   |
 
- You can run it like below.
- ```
- python -m matching_nets.py --dataset omniglot --fce False --k-test 5 --n-test 1 --distance l2
- ```
-
 **Final**
 
-- See pretrained model in **pretrained** file.
-
-- You can see each step of our implements with paddle compares to pytorch in **pipeline**.
+- See pretrained model in **pretrained** file. 
 
